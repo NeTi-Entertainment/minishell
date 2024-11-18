@@ -1,0 +1,44 @@
+leak echo ctrl-d
+
+==214817== 2 bytes in 1 blocks are definitely lost in loss record 1 of 64
+==214817==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==214817==    by 0x10D871: ft_newstr (in /mnt/e/42-folder/minishell/minishell)
+==214817==    by 0x10D8C6: ft_itoa (in /mnt/e/42-folder/minishell/minishell)
+==214817==    by 0x10B35F: get_var_value (expand_vars.c:18)
+==214817==    by 0x10B525: handle_var (expand_vars.c:54)
+==214817==    by 0x10B8D3: expand_variables (expand_vars.c:126)
+==214817==    by 0x10C363: handle_input (minishell.c:48)
+==214817==    by 0x10C46C: main (minishell.c:85)
+==214817==
+==214817== LEAK SUMMARY:
+==214817==    definitely lost: 2 bytes in 1 blocks
+==214817==    indirectly lost: 0 bytes in 0 blocks
+==214817==      possibly lost: 0 bytes in 0 blocks
+==214817==    still reachable: 0 bytes in 0 blocks
+==214817==         suppressed: 208,178 bytes in 222 blocks
+==214817==
+
+==214518== 4 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==214518==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==214518==    by 0x10D843: ft_newstr (in /mnt/e/42-folder/minishell/minishell)
+==214518==    by 0x10D898: ft_itoa (in /mnt/e/42-folder/minishell/minishell)
+==214518==    by 0x10B35F: get_var_value (expand_vars.c:18)
+==214518==    by 0x10B525: handle_var (expand_vars.c:54)
+==214518==    by 0x10B8A5: expand_variables (expand_vars.c:125)
+==214518==    by 0x10C335: handle_input (minishell.c:48)
+==214518==    by 0x10C43E: main (minishell.c:85)
+==214518==
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:ft_newstr
+   fun:ft_itoa
+   fun:get_var_value
+   fun:handle_var
+   fun:expand_variables
+   fun:handle_input
+   fun:main
+}
+
