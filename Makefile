@@ -22,7 +22,7 @@ OBJ_DIR		=	obj
 
 LIBFT_DIR	=	libft
 
-SRCS		=	$(wildcard $(SRC_DIR)/*.c)
+SRCS		=	$(shell find $(SRC_DIR) -name '*.c')
 
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -34,7 +34,7 @@ $(NAME):		$(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):

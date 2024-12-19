@@ -30,7 +30,8 @@ SOURCES =		ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 				get_next_line.c get_next_line_utils.c ft_power.c ft_calloc_mt.c \
 				ft_putstr_mt.c ft_strlen_mt.c ft_strcmp.c ft_strcat.c ft_realloc.c \
 				ft_strncpy.c ft_isspace.c ft_strtok.c ft_strcpy.c ft_strndup.c \
-				ft_strnew.c ft_realloc_bis.c ft_atol.c ft_is_valid_identifier.c
+				ft_strnew.c ft_realloc_bis.c ft_atol.c ft_is_valid_identifier.c \
+				ft_strstr.c
 
 SOURCES_B =		ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
 				ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \

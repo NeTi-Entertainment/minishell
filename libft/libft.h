@@ -126,6 +126,8 @@ int		ft_power(int nb, int power);
 
 char	*ft_strtok(char *str, char sepa);
 
+char	*ft_strstr(char *str, char *to_find);
+
 /*for chained lists*/
 
 t_list	*ft_lstnew(void *content);

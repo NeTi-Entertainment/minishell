@@ -12,45 +12,55 @@
 
 #include "libft.h"
 
+static void	clean_original(char **original)
+{
+	if (*original)
+	{
+		free(*original);
+		*original = NULL;
+	}
+}
+
+static char	*reset_stock(char **original, char **stock)
+{
+	clean_original(original);
+	*stock = NULL;
+	return (NULL);
+}
+
+static char	*process_token(char **stock, char sepa)
+{
+	char	*ptr;
+
+	ptr = NULL;
+	while (**stock == sepa)
+		(*stock)++;
+	if (**stock != '\0')
+	{
+		ptr = *stock;
+		while (**stock && **stock != sepa)
+			(*stock)++;
+		if (**stock != '\0')
+		{
+			**stock = '\0';
+			(*stock)++;
+		}
+	}
+	return (ptr);
+}
+
 char	*ft_strtok(char *str, char sepa)
 {
 	static char	*stock;
 	static char	*original;
-	char		*ptr;
 
-	ptr = NULL;
 	if (str != NULL)
 	{
-		if (original)
-		{
-			free(original);
-			original = NULL;
-		}
+		clean_original(&original);
 		stock = ft_strdup(str);
 		original = stock;
 	}
 	if (!stock || *stock == '\0')
-	{
-		if (original)
-		{
-			free(original);
-			original = NULL;
-		}
-		stock = NULL;
-		return (NULL);
-	}
-	while (*stock == sepa)
-		stock++;
-	if (*stock != '\0')
-	{
-		ptr = stock;
-		while (*stock && *stock != sepa)
-			stock++;
-		if (*stock != '\0')
-		{
-			*stock = '\0';
-			stock++;
-		}
-	}
-	return (ptr);
+		return (reset_stock(&original, &stock));
+	return (process_token(&stock, sepa));
 }

@@ -1,4 +1,394 @@
 {
+	readline_leak_84
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+}
+{
+	readline_leak_83
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+}
+{
+	readline_leak_82
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+	fun:main
+}
+{
+	readline_leak_81
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+	fun:execute_commands
+}
+{
+	readline_leak_80
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+}
+{
+	readline_leak_79
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+}
+{
+	readline_leak_78
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+	fun:execute_commands
+}
+{ 
+	readline_leak_77
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+}
+{
+    readline_leak_76
+    Memcheck:Leak
+    match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc_child
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+}
+{
+	readline_leak_75
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+	fun:main
+}
+{
+	readline_leak_74
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+}
+{
+	readline_leak_73
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+}
+{
+	readline_leak_72
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+	fun:execute_commands
+	fun:execute_if_valid
+}
+{
+	readline_leak_71
+    Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+}
+{
+	readline_leak_70
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:read_minimal_heredoc
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+}
+{
+	readline_leak_69
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+	fun:main
+}
+{
+	readline_leak_68
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+	fun:main
+}
+{
+	readline_leak_67
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+	fun:execute_commands
+}
+{
+	readline_leak_66
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:readline_internal_teardown
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+	fun:main
+}
+{
+	readline_leak_65
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:realloc
+	fun:xrealloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+	fun:main
+}
+{
+	readline_leak_64
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_set_prompt
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+	fun:execute_commands
+	fun:execute_if_valid
+	fun:handle_input
+}
+{
+	readline_leak_63
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+	fun:rl_expand_prompt
+	fun:rl_set_prompt
+	fun:readline
+	fun:handle_heredoc
+	fun:apply_redirections
+	fun:execute_child_process
+	fun:fork_and_execute
+	fun:handle_external_command
+	fun:execute_commands
+}
+{
+	add_history_leak_2
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:alloc_history_entry
+	fun:add_history
+	fun:get_input
+	fun:main
+}
+{
+	add_history_leak_1
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:add_history
+	fun:get_input
+	fun:main
+}
+{
    readline_leak_62
    Memcheck:Leak
    match-leak-kinds: reachable
@@ -30,41 +420,6 @@
    fun:get_input
    fun:main
 }
-{
-   HISTORYLEAKHISTORYLEAKHISTORYLEAKHISTORYLEAKHISTORYLEAK---3
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:ft_strnew
-   fun:ft_strdup
-   fun:add_token
-   fun:process_input
-   fun:lexer
-   fun:handle_input
-   fun:main
-}
-{
-   HISTORYLEAKHISTORYLEAKHISTORYLEAKHISTORYLEAKHISTORYLEAK---2
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:xmalloc
-   fun:alloc_history_entry
-   fun:add_history
-   fun:get_input
-   fun:main
-}
-{
-   HISTORYLEAKHISTORYLEAKHISTORYLEAKHISTORYLEAKHISTORYLEAK---1
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:xmalloc
-   fun:add_history
-   fun:get_input
-   fun:main
-}
-
 {
    readline_leak_60
    Memcheck:Leak
