@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:56:04 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:56:04 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:23:28 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*create_env_string(const char *key, const char *value)
 {

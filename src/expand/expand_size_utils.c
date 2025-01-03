@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:49:02 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:49:02 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:27:45 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	handle_quoted_len(char **result, int *j, char *input, int quote_len)
 {

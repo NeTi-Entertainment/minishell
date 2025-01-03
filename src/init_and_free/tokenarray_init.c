@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 03:35:48 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/30 03:35:48 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:28:47 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 static int	*alloc_quoted(int capacity)
 {

@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:28:29 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:28:29 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:26:24 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_home_directory(t_cmd *cmd, t_shell_data *shell_data)
 {
@@ -74,7 +74,7 @@ static void	handle_command_execution(t_cmd *cmd, t_shell_data *sd)
 
 static int	handle_redirections(t_cmd *cmd, t_shell_data *shell_data)
 {
-	if (cmd->redirects && apply_redirections(cmd->redirects))
+	if (cmd->redirects && apply_redirections(cmd->redirects, shell_data))
 	{
 		shell_data->last_exit_status = 1;
 		return (1);

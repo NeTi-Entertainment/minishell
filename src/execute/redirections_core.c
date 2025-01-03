@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:58:38 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/29 11:58:38 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:27:13 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 static int	open_file(char *file, int flags, int mode)
 {
@@ -22,8 +22,7 @@ static int	open_file(char *file, int flags, int mode)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(file, 2);
 		ft_putendl_fd(": No such file or directory", 2);
-		g_exit_code = 1;
-		return (g_exit_code);
+		return (-1);
 	}
 	return (fd);
 }
@@ -34,13 +33,10 @@ static int	handle_input_redirect(char *file)
 
 	fd = open_file(file, O_RDONLY, 0);
 	if (fd == -1)
-	{
-		g_exit_code = 1;
-		return (g_exit_code);
-	}
+		return (1);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	return (g_exit_code);
+	return (0);
 }
 
 static int	handle_output_redirect(char *file, int append)
@@ -64,7 +60,7 @@ static int	handle_output_redirect(char *file, int append)
 	return (close(fd));
 }
 
-int	apply_redirections(t_redirect *redirects)
+int	apply_redirections(t_redirect *redirects, t_shell_data *sd)
 {
 	t_redirect	*current;
 	int			ret;
@@ -78,7 +74,7 @@ int	apply_redirections(t_redirect *redirects)
 			ret = handle_output_redirect(current->file, 0);
 		else if (current->type == 2)
 		{
-			ret = handle_heredoc(current->file, current->eof_quoted);
+			ret = handle_heredoc(current->file, current->eof_quoted, sd);
 			if (ret == -1)
 				return (1);
 		}

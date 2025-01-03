@@ -6,95 +6,92 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:46:02 by caubert           #+#    #+#             */
-/*   Updated: 2024/12/10 14:46:02 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:25:40 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-/*del = delimiter, i_fd = input_fd*/
-static int	handle_heredoc_child(int *pipes, const char *del, int exp, int i_fd)
+static char	*create_temp_file(void)
 {
-	struct sigaction	sa;
+	static int	count;
+	char		*name;
+	char		*num;
+	char		*temp;
 
-	sa.sa_handler = SIG_DFL;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	close(pipes[0]);
-	if (dup2(i_fd, STDIN_FILENO) == -1)
-		exit(1);
-	if (read_minimal_heredoc(pipes[1], del, exp) != 0)
-		exit(1);
-	close(pipes[1]);
-	cleanup_heredoc_process();
-	exit(0);
+	count = 0;
+	num = ft_itoa(count++);
+	if (!num)
+		return (NULL);
+	temp = ft_strjoin("/tmp/heredoc_", num);
+	free(num);
+	name = ft_strdup(temp);
+	free(temp);
+	return (name);
 }
 
-static int	setup_heredoc_fds(int *pipes, int *tty_fd, int *stdin_backup)
+static int	write_heredoc_content(int fd, char *delimiter, int expand, \
+				t_shell_data *sd)
 {
-	*tty_fd = open("/dev/tty", O_RDONLY);
-	*stdin_backup = dup(STDIN_FILENO);
-	if (*tty_fd == -1 || pipe(pipes) == -1)
+	char	*line;
+
+	while (1)
 	{
-		if (*stdin_backup != -1)
-			close(*stdin_backup);
-		return (0);
+		line = readline("> ");
+		if (!line || !ft_strcmp(line, delimiter))
+		{
+			free(line);
+			break ;
+		}
+		if (expand)
+			line = expand_variables(line, sd);
+		ft_putendl_fd(line, fd);
+		free(line);
 	}
-	return (1);
-}
-
-static void	update_shell_data(int pipe_read_fd, int stdin_backup)
-{
-	t_shell_data	*shell;
-
-	shell = get_shell_data();
-	shell->cmd->has_heredoc = 1;
-	shell->cmd->heredoc_fd = pipe_read_fd;
-	shell->cmd->tty_backup = stdin_backup;
-}
-
-static int	handle_heredoc_fork(int *pipes, char *del, int exp, int tty_fd)
-{
-	pid_t	pid;
-	int		status;
-
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	if (pid == 0)
-		handle_heredoc_child(pipes, del, exp, tty_fd);
-	close(pipes[1]);
-	close(tty_fd);
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
-	{
-		close(pipes[0]);
-		return (-1);
-	}
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		return (-1);
 	return (0);
 }
 
-int	handle_heredoc(char *delimiter, int eof_quoted)
+static int	create_and_write_heredoc(char *del, int eof_quoted, char **temp, \
+				t_shell_data *sd)
 {
-	int		pipes[2];
-	int		result;
-	int		tty_fd;
-	int		stdin_backup;
+	int	fd;
 
-	if (!validate_delimiter(delimiter))
+	*temp = create_temp_file();
+	if (!*temp)
 		return (-1);
-	if (!setup_heredoc_fds(pipes, &tty_fd, &stdin_backup))
-		return (-1);
-	result = handle_heredoc_fork(pipes, delimiter, !eof_quoted, tty_fd);
-	if (result == -1)
+	fd = open(*temp, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	if (fd == -1)
 	{
-		close(stdin_backup);
-		return (cleanup_heredoc_pipes(pipes));
+		free(*temp);
+		return (-1);
 	}
-	update_shell_data(pipes[0], stdin_backup);
-	return (setup_heredoc_input(pipes[0]));
+	if (write_heredoc_content(fd, del, !eof_quoted, sd) == -1)
+	{
+		close(fd);
+		unlink(*temp);
+		free(*temp);
+		return (-1);
+	}
+	close(fd);
+	return (0);
+}
+
+int	handle_heredoc(char *delimiter, int eof_quoted, t_shell_data *sd)
+{
+	char	*temp_file;
+	int		read_fd;
+	int		ret;
+
+	ret = create_and_write_heredoc(delimiter, eof_quoted, &temp_file, sd);
+	if (ret == -1)
+		return (-1);
+	read_fd = open(temp_file, O_RDONLY);
+	unlink(temp_file);
+	free(temp_file);
+	if (dup2(read_fd, STDIN_FILENO) == -1)
+	{
+		close(read_fd);
+		return (-1);
+	}
+	return (0);
 }

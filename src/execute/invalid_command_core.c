@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:52:17 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/29 12:52:17 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:26:50 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_bin_error(t_cmd *cmd, t_shell_data *shell_data)
 {
@@ -51,7 +51,7 @@ int	handle_invalid_command(t_cmd *cmd, t_shell_data *shell_data)
 		handle_special_char_cmd(cmd, shell_data);
 		return (1);
 	}
-	if (is_expanded_invalid_cmd(cmd->name, cmd->n_quoted))
+	if (is_expanded_invalid_cmd(cmd->name, cmd->n_quoted, shell_data))
 	{
 		handle_expanded_invalid_cmd(cmd, shell_data);
 		return (1);

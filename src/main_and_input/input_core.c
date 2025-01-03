@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:14:58 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:14:58 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:29:50 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	cleanup_current_cmd(t_shell_data *shell_data)
 {
@@ -57,29 +57,25 @@ t_cmd	*execute_input(char *input, t_shell_data *shell_data)
 	return (cmd);
 }
 
-void	execute_if_valid(t_cmd *cmd, t_shell_data *sd, int backup_g)
+void	execute_if_valid(t_cmd *cmd, t_shell_data *sd)
 {
 	if (cmd)
 	{
 		sd->cmd = cmd;
 		execute_commands(cmd, sd);
-		if (g_exit_code != backup_g)
-			sd->last_exit_status = g_exit_code;
 	}
 }
 
 void	handle_input(char *input, t_shell_data *shell_data)
 {
 	t_cmd	*cmd;
-	int		backup_g;
 
 	if (!input)
 		exit(0);
-	backup_g = g_exit_code;
 	if (handle_syntax_check(input, shell_data))
 		return ;
 	cleanup_current_cmd(shell_data);
 	cmd = execute_input(input, shell_data);
 	free(input);
-	execute_if_valid(cmd, shell_data, backup_g);
+	execute_if_valid(cmd, shell_data);
 }

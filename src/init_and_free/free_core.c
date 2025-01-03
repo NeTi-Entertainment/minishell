@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:27:34 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:27:34 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:28:27 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	free_ptr(void *ptr)
 {

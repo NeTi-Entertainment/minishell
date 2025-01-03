@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:06:41 by caubert           #+#    #+#             */
-/*   Updated: 2024/12/16 16:06:41 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:25:28 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	check_redirect_arg_error(char **args, t_shell_data *shell_data)
 {

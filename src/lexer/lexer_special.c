@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:16:38 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:16:38 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:29:28 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_trailing_space(t_ta *ta, int was_quoted)
 {
@@ -70,4 +70,28 @@ void	handle_special_chars(t_ta *ta, char **input)
 		ta->token[0] = **input;
 		process_special_token(ta, input);
 	}
+}
+
+void	resize_token_array(t_ta *ta)
+{
+	int		new_capacity;
+	char	**new_tokens;
+	int		*new_quoted;
+	int		i;
+
+	new_capacity = ta->capacity * 2;
+	new_tokens = ft_realloc(ta->tokens, new_capacity * sizeof(char *));
+	new_quoted = ft_realloc(ta->quoted, new_capacity * sizeof(int));
+	if (!new_tokens || !new_quoted)
+		return ;
+	ta->tokens = new_tokens;
+	ta->quoted = new_quoted;
+	i = ta->capacity;
+	while (i < new_capacity)
+	{
+		ta->tokens[i] = NULL;
+		ta->quoted[i] = 0;
+		i++;
+	}
+	ta->capacity = new_capacity;
 }

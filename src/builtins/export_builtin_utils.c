@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:17:21 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/26 16:17:21 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:22:12 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	export_error(char *identifier, char *arg, t_shell_data *sd)
 {

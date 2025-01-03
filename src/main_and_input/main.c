@@ -6,22 +6,22 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:15:12 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:15:12 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 14:49:15 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-volatile sig_atomic_t	g_exit_code = 0;
+#include "../../include/minishell.h"
 
 char	*get_input(void)
 {
-	char		*line;
+	char	*line;
 
+	check_and_restore_stdin();
 	line = readline(PROMPT);
 	if (!line)
 	{
-		printf("exit\n");
+		if (read(STDIN_FILENO, NULL, 0) == 0)
+			printf("exit\n");
 		return (NULL);
 	}
 	if (*line)
@@ -29,57 +29,41 @@ char	*get_input(void)
 	return (line);
 }
 
-t_shell_data	*get_shell_data(void)
+static int	main_loop(t_shell_data *shell)
 {
-	static t_shell_data	*shell_data;
+	char	*input;
 
-	if (!shell_data)
-	{
-		shell_data = malloc(sizeof(t_shell_data));
-		if (!shell_data)
-			return (NULL);
-		shell_data->env = init_env(__environ);
-		shell_data->cmd = NULL;
-		shell_data->last_exit_status = 0;
-	}
-	return (shell_data);
-}
-
-int	initialize_shell(t_shell_data **shell)
-{
-	init_signals();
-	*shell = get_shell_data();
-	if (!*shell)
-		return (1);
-	initialize_shlvl(&(*shell)->env);
-	return (0);
-}
-
-int	main(int ac, char **av, char **envp)
-{
-	t_shell_data	*shell;
-	char			*input;
-
-	(void)ac;
-	(void)av;
-	(void)envp;
-	if (initialize_shell(&shell))
-		return (1);
 	while (1)
 	{
 		input = get_input();
 		if (!input)
-			break ;
-		if (ft_strlen(input) > 0)
 		{
-			handle_input(input, shell);
-			g_exit_code = shell->last_exit_status;
+			if (!is_eof_reached())
+				continue ;
+			break ;
 		}
+		if (g_sig == SIGINT)
+			update_exit_status(shell);
+		if (ft_strlen(input) > 0)
+			handle_input(input, shell);
 		else
 			free(input);
 	}
 	free(input);
 	rl_clear_history();
+	return (shell->last_exit_status);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_shell_data	*shell;
+	int				exit_status;
+
+	(void)ac;
+	(void)av;
+	if (initialize_shell(&shell, envp))
+		return (1);
+	exit_status = main_loop(shell);
 	ft_cleanup_shell(&shell);
-	return (g_exit_code);
+	return (exit_status);
 }

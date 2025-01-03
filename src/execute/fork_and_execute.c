@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:30:01 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:30:01 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:24:36 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_pipe_fds(int *pipe_fd)
 {

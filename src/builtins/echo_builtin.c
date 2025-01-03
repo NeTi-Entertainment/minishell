@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 13:20:19 by caubert           #+#    #+#             */
-/*   Updated: 2024/12/17 13:05:50 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:22:37 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 static int	has_history_expansion(const char *str, int is_quoted)
 {
@@ -59,16 +59,6 @@ int	builtin_echo(t_cmd *cmd)
 	int	i;
 	int	n_flag;
 
-	printf("\n===== Echo debug =====\n");
-	printf("Command name: '%s' (quoted: %d)\n", cmd->name, cmd->quoted);
-	printf("Arguments:\n");
-	i = 0;
-	while (i < cmd->arg_count)
-	{
-		printf("arg[%d]: '%s'\n", i, cmd->args[i]);
-		i++;
-	}
-	printf("========================\n\n");
 	i = 1;
 	n_flag = 0;
 	while (cmd->args[i] && i < cmd->arg_count && \

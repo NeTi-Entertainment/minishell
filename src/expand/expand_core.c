@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:48:51 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:48:51 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:27:35 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	get_var_length(const char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:36:40 by caubert           #+#    #+#             */
-/*   Updated: 2024/10/25 15:12:38 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 14:59:41 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-# include <execinfo.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -31,8 +30,6 @@
 # include <errno.h>
 
 # define PROMPT "minishell> "
-
-extern volatile sig_atomic_t	g_exit_code;
 
 typedef struct s_fd_info
 {
@@ -130,19 +127,12 @@ typedef struct s_exp
 	t_shell_data		*shell;
 }	t_exp;
 
-int				handle_heredoc(char *delimiter, int eof_quoted);
-t_ta			*init_new_ta(t_ta *ta, int index);
-char			**create_sub_tokens(t_ta *ta, int index, t_ta *new_ta);
-int				init_quoted_array(t_ta *new_ta, t_ta *ta, int index);
+extern volatile sig_atomic_t	g_sig;
 
 /*============================== main_and_input ==============================*/
 
 /* main.c */
 char			*get_input(void);
-
-t_shell_data	*get_shell_data(void);
-
-int				initialize_shell(t_shell_data **shell);
 
 int				main(int ac, char **av, char **envp);
 
@@ -153,7 +143,7 @@ int				handle_syntax_check(char *input, t_shell_data *shell_data);
 
 t_cmd			*execute_input(char *input, t_shell_data *shell_data);
 
-void			execute_if_valid(t_cmd *cmd, t_shell_data *sd, int backup_g);
+void			execute_if_valid(t_cmd *cmd, t_shell_data *sd);
 
 void			handle_input(char *input, t_shell_data *shel_data);
 
@@ -162,6 +152,10 @@ void			handle_input(char *input, t_shell_data *shel_data);
 void			update_shlvl(t_env **env, int level);
 
 void			initialize_shlvl(t_env **env);
+
+void			check_and_restore_stdin(void);
+
+int				is_eof_reached(void);
 
 /*================================= execute ==================================*/
 
@@ -191,7 +185,7 @@ void			handle_external_command(t_cmd *cmd, t_shell_data *shell_data);
 void			execute_commands(t_cmd *cmd, t_shell_data *shell_data);
 
 /* execute_single.c */
-void			handle_child_signals(int status);
+void			handle_child_signals(int status, t_shell_data *sd);
 
 int				execute_builtin(t_cmd *cmd, t_shell_data *shell_data);
 
@@ -204,7 +198,8 @@ void			execute_piped_commands(t_cmd *cmd, t_shell_data *sd);
 
 void			wait_for_children(t_shell_data *shell_data, int child_count);
 
-void			handle_pid_value(pid_t wpid, int status, t_shell_data *sd, t_cmd *cmd);
+void			handle_pid_value(pid_t wpid, int status, t_shell_data *sd, \
+									t_cmd *cmd);
 
 void			execute_pipeline(t_cmd *cmd, t_shell_data *shell_data);
 
@@ -230,7 +225,7 @@ void			cleanup_pipe(t_fd_info *fd_info);
 void			cleanup_all_pipes(t_cmd *cmd);
 
 /* redirections_core.c */
-int				apply_redirections(t_redirect *redirects);
+int				apply_redirections(t_redirect *redirects, t_shell_data *sd);
 
 /* fork_and_execute.c */
 void			handle_pipe_fds(int *pipe_fd);
@@ -250,36 +245,27 @@ int				handle_invalid_command(t_cmd *cmd, t_shell_data *shell_data);
 void			handle_empty_quotes_cmd(t_shell_data *shell_data);
 
 /* invalid_command_expanded.c */
-int				is_expanded_invalid_cmd(const char *name, int quoted);
+int				is_expanded_invalid_cmd(const char *name, int quoted, \
+					t_shell_data *sd);
 
 void			handle_expanded_invalid_cmd(t_cmd *cmd, t_shell_data *sd);
 
 /* execute_external.c */
 int				check_redirect_arg_error(char **args, t_shell_data *shell_data);
 
-void			handle_command_error(t_cmd *cmd, t_shell_data *sd, int is_permission);
+void			handle_command_error(t_cmd *cmd, t_shell_data *sd, \
+										int is_permission);
 
 void			execute_with_path(char *path, t_cmd *cmd, t_shell_data *sd);
 
-void			check_file_permissions(char *path, t_cmd *cmd, t_shell_data *sd);
+void			check_file_permissions(char *path, t_cmd *cmd, \
+										t_shell_data *sd);
 
 void			execute_external(t_cmd *cmd, t_shell_data *shell_data);
 
 /* heredoc_core.c */
-
-/* heredoc_read.c */
-int				read_minimal_heredoc(int fd_write, const char *delimiter, int exp);
-
-/* heredoc_utils.c */
-void			cleanup_heredoc_process(void);
-
-char			*clean_delimiter(const char *delimiter);
-
-int				validate_delimiter(const char *delimiter);
-
-int				cleanup_heredoc_pipes(int *pipes);
-
-int				setup_heredoc_input(int read_fd);
+int				handle_heredoc(char *delimiter, int eof_quoted, \
+					t_shell_data *sd);
 
 /*=================================== env ====================================*/
 
@@ -287,6 +273,8 @@ int				setup_heredoc_input(int read_fd);
 void			sigint_handler(int sig);
 
 void			init_signals(void);
+
+void			update_exit_status(t_shell_data *shell_data);
 
 /* env_core.c */
 char			*create_env_string(const char *key, const char *value);
@@ -309,6 +297,11 @@ t_env			*create_env_node(char *env_str);
 void			add_env_node(t_env **env_list, t_env *new_node);
 
 t_env			*init_env(char **envp);
+
+/* shell_core.c */
+t_shell_data	*init_shell_data(char **envp);
+
+int				initialize_shell(t_shell_data **shell, char **envp);
 
 /*================================= builtins =================================*/
 
@@ -340,11 +333,14 @@ int				is_valid_identifier_char(char c);
 
 int				check_exclamation_export(const char *str);
 
+/* export_builtin_error.c */
+void			export_event_error(char *full_arg);
+
 /* unset_builtin.c */
 void			builtin_unset(t_cmd *cmd, t_shell_data *shell_data);
 
 /* pwd_builtin.c */
-void			builtin_pwd(void);
+int				builtin_pwd(t_cmd *cmd);
 
 /*================================== syntax ==================================*/
 
@@ -405,6 +401,8 @@ void			handle_quotes(t_ta *ta, char *input);
 void			handle_trailing_space(t_ta *ta, int was_quoted);
 
 void			handle_special_chars(t_ta *ta, char **input);
+
+void			resize_token_array(t_ta *ta);
 
 /*================================== parser ==================================*/
 

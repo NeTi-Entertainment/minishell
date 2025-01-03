@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:16:26 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:16:26 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:29:14 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	is_only_quotes(const char *input)
 {

@@ -6,35 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:16:13 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:16:13 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:29:04 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-static void	resize_token_array(t_ta *ta)
-{
-	int		new_capacity;
-	char	**new_tokens;
-	int		*new_quoted;
-	int		i;
-
-	new_capacity = ta->capacity * 2;
-	new_tokens = ft_realloc(ta->tokens, new_capacity * sizeof(char *));
-	new_quoted = ft_realloc(ta->quoted, new_capacity * sizeof(int));
-	if (!new_tokens || !new_quoted)
-		return ;
-	ta->tokens = new_tokens;
-	ta->quoted = new_quoted;
-	i = ta->capacity;
-	while (i < new_capacity)
-	{
-		ta->tokens[i] = NULL;
-		ta->quoted[i] = 0;
-		i++;
-	}
-	ta->capacity = new_capacity;
-}
+#include "../../include/minishell.h"
 
 void	process_char(t_ta *ta, char **input)
 {
@@ -143,9 +119,5 @@ t_ta	*lexer(char *input)
 		free_tokenarray(ta);
 		return (NULL);
 	}
-	printf("\n===== Tokens =====\n");
-	for (int i = 0; i < ta->count; i++)
-		printf("Token[%d]: '%s' (quoted: %d)\n", i, ta->tokens[i], ta->quoted[i]);
-	printf("====================\n\n");
 	return (ta);
 }

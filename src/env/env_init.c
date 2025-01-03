@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:56:21 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:56:21 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:23:37 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	**allocate_env_array(t_env *env, int *count)
 {

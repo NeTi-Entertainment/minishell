@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:46:45 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/29 11:46:45 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:25:50 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	cleanup_pipeline_fds(t_cmd *cmd)
 {

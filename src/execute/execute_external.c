@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:28:44 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:28:44 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:24:23 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	execute_with_path(char *path, t_cmd *cmd, t_shell_data *sd)
 {

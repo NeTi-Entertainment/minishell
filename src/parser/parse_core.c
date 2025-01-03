@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:22:20 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:22:20 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:30:58 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	process_token(t_cmd *cmd, t_ta *ta, int *i)
 {
@@ -89,11 +89,6 @@ t_cmd	*parse_tokens(t_ta *ta)
 	t_cmd	*cmd;
 	int		i;
 
-	printf("\n===== parse tokens debug =====\n");
-	printf("Total tokens: %d\n", ta->count);
-	for (int j = 0; j < ta->count; j++)
-		printf("Token[%d]: '%s' (quoted: %d)\n", j, ta->tokens[j], ta->quoted[j]);
-	printf("===============================\n\n");
 	if (!ta || !ta->tokens)
 		return (NULL);
 	cmd = cmd_init();

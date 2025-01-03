@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:28:20 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/27 10:28:20 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:22:28 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 static int	handle_unset_error(char *arg, int has_exclamation)
 {

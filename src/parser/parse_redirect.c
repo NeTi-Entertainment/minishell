@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:22:33 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:22:33 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:31:09 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	cleanup_pipe_data(t_ta *new_ta, char **sub_tokens, int last_alloc)
 {

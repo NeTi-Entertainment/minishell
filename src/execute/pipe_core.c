@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:30:21 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:30:21 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:27:04 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	execute_piped_commands(t_cmd *cmd, t_shell_data *sd)
 {

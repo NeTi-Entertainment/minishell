@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:01:31 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/29 12:01:31 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:31:19 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 t_ta	*init_new_ta(t_ta *ta, int index)
 {

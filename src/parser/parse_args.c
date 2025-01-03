@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:21:53 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:21:53 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:30:42 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	should_concat(char *prev_arg, char *curr_arg)
 {
@@ -45,11 +45,6 @@ void	concat_argument(t_cmd *cmd, char *arg)
 
 void	add_argument(t_cmd *cmd, char *arg, int quoted)
 {
-	printf("\n===== add argument debug =====\n");
-	printf("Adding argument: '%s' (quoted: %d)\n", arg, quoted);
-	printf("Current cmd->quoted: %d\n", cmd->quoted);
-	printf("Current arg_count: %d\n", cmd->arg_count);
-	printf("===============================\n\n");
 	if (cmd->arg_count > 0 && should_concat(cmd->args[cmd->arg_count - 1], arg))
 	{
 		concat_argument(cmd, arg);

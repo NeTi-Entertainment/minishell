@@ -6,13 +6,13 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:29:40 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 18:29:40 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:26:40 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-void	handle_child_signals(int status)
+void	handle_child_signals(int status, t_shell_data *sd)
 {
 	if (WIFSIGNALED(status))
 	{
@@ -21,7 +21,7 @@ void	handle_child_signals(int status)
 		else if (WTERMSIG(status) == SIGQUIT)
 		{
 			ft_putstr_fd("Quit (core dumped)\n", 2);
-			g_exit_code = 131;
+			sd->last_exit_status = 131;
 		}
 	}
 }
@@ -41,7 +41,7 @@ int	execute_builtin(t_cmd *cmd, t_shell_data *shell_data)
 	else if (ft_strcmp(cmd->name, "export") == 0)
 		builtin_export(cmd, shell_data);
 	else if (ft_strcmp(cmd->name, "pwd") == 0)
-		builtin_pwd();
+		shell_data->last_exit_status = builtin_pwd(cmd);
 	else if (ft_strcmp(cmd->name, "unset") == 0)
 		builtin_unset(cmd, shell_data);
 	if (cmd->prev || cmd->next)
@@ -55,15 +55,21 @@ void	execute_single_command(t_cmd *cmd, t_shell_data *shell_data)
 
 	if (!cmd || !cmd->name)
 		return ;
-	g_exit_code = 130;
+	shell_data->last_exit_status = 0;
 	if (is_builtin(cmd->name))
 	{
 		execute_builtin(cmd, shell_data);
 		return ;
 	}
 	status = fork_and_execute(cmd, shell_data, STDIN_FILENO, NULL);
-	shell_data->last_exit_status = WEXITSTATUS(status);
-	g_exit_code = 0;
+	if (WIFEXITED(status))
+		shell_data->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		update_exit_status(shell_data);
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putendl_fd("Quit (core dumped)", 2);
+	}
 }
 
 void	execute_child_process(t_cmd *cmd, t_shell_data *shell_data)

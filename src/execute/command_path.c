@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 12:32:09 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/26 12:32:09 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:24:09 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*try_path_access(const char *dir, const char *cmd)
 {

@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:27:46 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:27:46 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:28:38 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 t_cmd	*cmd_init(void)
 {

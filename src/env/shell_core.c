@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_builtin.c                                      :+:      :+:    :+:   */
+/*   shell_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 13:20:03 by caubert           #+#    #+#             */
-/*   Updated: 2025/01/02 13:23:13 by caubert          ###   ########.fr       */
+/*   Created: 2025/01/02 14:41:29 by caubert           #+#    #+#             */
+/*   Updated: 2025/01/02 15:06:13 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	builtin_pwd(t_cmd *cmd)
+t_shell_data	*init_shell_data(char **envp)
 {
-	char	*pwd;
-	char	*arg;
+	t_shell_data	*shell_data;
 
-	arg = cmd->args[1];
-	if ((arg && arg[0] == '-' && arg[1] && arg[1] != '-') || \
-			(arg && arg[0] == '-' && arg[1] == '-' && arg[2]))
-	{
-		ft_putstr_fd("minishell: pwd: -", 2);
-		ft_putchar_fd(arg[1], 2);
-		ft_putendl_fd(": invalid option", 2);
-		return (2);
-	}
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		ft_putendl_fd(pwd, 1);
-		free(pwd);
-		return (0);
-	}
-	else
-	{
-		perror("pwd");
+	shell_data = malloc(sizeof(t_shell_data));
+	if (!shell_data)
+		return (NULL);
+	shell_data->env = init_env(envp);
+	shell_data->cmd = NULL;
+	shell_data->last_exit_status = 0;
+	return (shell_data);
+}
+
+int	initialize_shell(t_shell_data **shell, char **envp)
+{
+	init_signals();
+	*shell = init_shell_data(envp);
+	if (!*shell)
 		return (1);
-	}
+	initialize_shlvl(&(*shell)->env);
+	return (0);
 }

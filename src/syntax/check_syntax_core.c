@@ -6,11 +6,11 @@
 /*   By: caubert <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 19:04:11 by caubert           #+#    #+#             */
-/*   Updated: 2024/11/28 19:04:11 by caubert          ###   ########.fr       */
+/*   Updated: 2025/01/02 13:31:56 by caubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	check_multi_redir(char *input, int *i)
 {
