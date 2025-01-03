@@ -193,6 +193,8 @@ void			execute_single_command(t_cmd *cmd, t_shell_data *shell_data);
 
 void			execute_child_process(t_cmd *cmd, t_shell_data *shell_data);
 
+void			tiny_child_redirect(t_cmd *cmd, t_shell_data *shell_data);
+
 /* pipe_core.c */
 void			execute_piped_commands(t_cmd *cmd, t_shell_data *sd);
 

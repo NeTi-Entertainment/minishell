@@ -91,7 +91,7 @@ void	execute_commands(t_cmd *cmd, t_shell_data *shell_data)
 	if (!cmd->fd_info)
 		return ;
 	backup_fds(cmd->fd_info);
-	if (handle_redirections(cmd, shell_data))
+	if (!is_pipeline(cmd) && handle_redirections(cmd, shell_data))
 	{
 		restore_fds(cmd->fd_info, cmd);
 		return ;

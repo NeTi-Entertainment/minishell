@@ -72,6 +72,15 @@ void	execute_single_command(t_cmd *cmd, t_shell_data *shell_data)
 	}
 }
 
+void	tiny_child_redirect(t_cmd *cmd, t_shell_data *shell_data)
+{
+	if (apply_redirections(cmd->redirects, shell_data))
+	{
+		ft_cleanup_shell(&shell_data);
+		exit(1);
+	}
+}
+
 void	execute_child_process(t_cmd *cmd, t_shell_data *shell_data)
 {
 	int					exit_status;
@@ -81,6 +90,8 @@ void	execute_child_process(t_cmd *cmd, t_shell_data *shell_data)
 	sigemptyset(&sa_quit.sa_mask);
 	sa_quit.sa_flags = 0;
 	sigaction(SIGQUIT, &sa_quit, NULL);
+	if (cmd->redirects)
+		tiny_child_redirect(cmd, shell_data);
 	if (is_builtin(cmd->name))
 	{
 		exit_status = execute_builtin(cmd, shell_data);

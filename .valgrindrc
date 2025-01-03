@@ -1,7 +1,88 @@
-
-
-
-
+{
+	readline_leak_59
+	Memcheck:Leak
+	match-leak-kinds: definite
+	fun:malloc
+	fun:xmalloc
+	fun:rl_add_undo
+	fun:rl_insert_text
+	fun:_rl_insert_char
+	fun:rl_insert
+	fun:_rl_dispatch_subseq
+	fun:readline_internal_char
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_58
+	Memcheck:Leak
+	match-leak-kinds: definite
+	fun:malloc
+	fun:xmalloc
+	fun:rl_add_undo
+	fun:rl_insert_text
+	fun:_rl_insert_char
+	fun:rl_insert
+	fun:_rl_dispatch_subseq
+	fun:readline_internal_char
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_57
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_add_undo
+	fun:rl_insert_text
+	fun:_rl_insert_char
+	fun:rl_insert
+	fun:_rl_dispatch_subseq
+	fun:readline_internal_char
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_56
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_maybe_save_line
+	fun:rl_get_previous_history
+	fun:_rl_dispatch_subseq
+	fun:_rl_dispatch_subseq
+	fun:_rl_dispatch_subseq
+	fun:readline_internal_char
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_55
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:rl_maybe_save_line
+	fun:rl_get_previous_history
+	fun:_rl_dispatch_subseq
+	fun:_rl_dispatch_subseq
+	fun:_rl_dispatch_subseq
+	fun:readline_internal_char
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
 {
 	readline_leak_54
 	Memcheck:Leak
