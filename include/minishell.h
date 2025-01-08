@@ -406,6 +406,9 @@ void			handle_special_chars(t_ta *ta, char **input);
 
 void			resize_token_array(t_ta *ta);
 
+/* lexer_util.c */
+int				add_token_failed(t_ta *ta);
+
 /*================================== parser ==================================*/
 
 /* parse_args.c */

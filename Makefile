@@ -32,6 +32,7 @@ SRCS		=	$(addprefix $(SRC_DIR)/, \
 				syntax/check_path_core.c syntax/check_pipe_core.c \
 				syntax/check_syntax_core.c \
 				lexer/lexer_core.c lexer/lexer_quote.c lexer/lexer_special.c \
+				lexer/lexer_util.c \
 				parser/parse_core.c parser/parse_args.c \
 				parser/parse_redirect.c parser/tokenarray_utils.c \
 				expand/expand_core.c expand/expand_size_utils.c \

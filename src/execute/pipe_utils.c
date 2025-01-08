@@ -20,6 +20,8 @@ void	backup_fds(t_fd_info *fd_info)
 
 void	restore_fds(t_fd_info *fd_info, t_cmd *cmd)
 {
+	if (!fd_info)
+		return ;
 	if (!cmd->has_heredoc && fd_info->stdin_backup != -1)
 	{
 		dup2(fd_info->stdin_backup, STDIN_FILENO);
@@ -37,14 +39,13 @@ void	create_all_pipes(t_cmd *cmd_list)
 	t_cmd	*cmd;
 
 	cmd = cmd_list;
-	while (cmd && cmd->next)
+	while (cmd)
 	{
 		fd_info_init(cmd);
-		create_pipe_for_cmd(cmd);
+		if (cmd->next)
+			create_pipe_for_cmd(cmd);
 		cmd = cmd->next;
 	}
-	if (cmd)
-		fd_info_init(cmd);
 }
 
 void	cleanup_pipe(t_fd_info *fd_info)

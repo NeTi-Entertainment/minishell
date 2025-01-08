@@ -80,8 +80,10 @@ void	resize_token_array(t_ta *ta)
 	int		i;
 
 	new_capacity = ta->capacity * 2;
-	new_tokens = ft_realloc(ta->tokens, new_capacity * sizeof(char *));
-	new_quoted = ft_realloc(ta->quoted, new_capacity * sizeof(int));
+	new_tokens = ft_realloc(ta->tokens, ta->capacity * sizeof(char *), \
+			new_capacity * sizeof(char *));
+	new_quoted = ft_realloc(ta->quoted, ta->capacity * sizeof(int), \
+			new_capacity * sizeof(int));
 	if (!new_tokens || !new_quoted)
 		return ;
 	ta->tokens = new_tokens;

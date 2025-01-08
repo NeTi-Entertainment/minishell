@@ -40,7 +40,7 @@ char	*ft_strndup(const char *s, size_t n);
 
 int		ft_isspace(int c);
 
-void	*ft_realloc(void *ptr, size_t newsize);
+void	*ft_realloc(void *ptr, size_t oldsize, size_t newsize);
 
 void	*ft_realloc_bis(void *ptr, size_t newsize);
 

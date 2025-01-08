@@ -14,13 +14,17 @@
 
 void	process_char(t_ta *ta, char **input)
 {
+	size_t	oldsize;
+
+	oldsize = ta->tokensize + 1;
 	if (ta->tokenindex == ta->tokensize)
 	{
 		if (ta->tokensize == 0)
 			ta->tokensize = 1;
 		else
 			ta->tokensize = ta->tokensize * 2;
-		ta->token = ft_realloc(ta->token, ta->tokensize + 1);
+		ta->token = ft_realloc(ta->token, oldsize * sizeof(char), \
+				(ta->tokensize + 1) * sizeof(char));
 		if (!ta->token)
 			return ;
 	}
@@ -70,20 +74,18 @@ int	add_token(t_ta *ta, char *token)
 {
 	char	**new_tokens;
 	int		*new_quoted;
+	size_t	oldsize;
 
 	if (ta->count == ta->capacity)
 	{
+		oldsize = ta->capacity;
 		ta->capacity *= 2;
-		new_tokens = ft_realloc(ta->tokens, sizeof(char *) * ta->capacity);
-		new_quoted = ft_realloc(ta->quoted, sizeof(int) * ta->capacity);
+		new_tokens = ft_realloc(ta->tokens, oldsize * sizeof(char *), \
+				sizeof(char *) * ta->capacity);
+		new_quoted = ft_realloc(ta->quoted, oldsize * sizeof(int), \
+				sizeof(int) * ta->capacity);
 		if (!new_tokens || !new_quoted)
-		{
-			free(ta->tokens);
-			free(ta->quoted);
-			ta->tokens = NULL;
-			ta->quoted = NULL;
-			return (1);
-		}
+			return (add_token_failed(ta));
 		ta->tokens = new_tokens;
 		ta->quoted = new_quoted;
 	}

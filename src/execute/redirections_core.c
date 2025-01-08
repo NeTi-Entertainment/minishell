@@ -34,7 +34,11 @@ static int	handle_input_redirect(char *file)
 	fd = open_file(file, O_RDONLY, 0);
 	if (fd == -1)
 		return (1);
-	dup2(fd, STDIN_FILENO);
+	if (dup2(fd, STDIN_FILENO) == -1)
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
 	return (0);
 }

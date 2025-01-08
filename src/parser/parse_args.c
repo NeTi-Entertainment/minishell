@@ -50,9 +50,10 @@ void	add_argument(t_cmd *cmd, char *arg, int quoted)
 		concat_argument(cmd, arg);
 		return ;
 	}
-	cmd->args = ft_realloc(cmd->args, sizeof(char *) * (cmd->arg_count + 2));
-	cmd->arg_quoted = ft_realloc(cmd->arg_quoted, sizeof(char *) * \
-			(cmd->arg_count + 2));
+	cmd->args = ft_realloc(cmd->args, sizeof(char *) * (cmd->arg_count + 1), \
+			sizeof(char *) * (cmd->arg_count + 2));
+	cmd->arg_quoted = ft_realloc(cmd->arg_quoted, sizeof(int) * \
+			(cmd->arg_count + 1), sizeof(int) * (cmd->arg_count + 2));
 	if (!cmd->args || !cmd->arg_quoted)
 		return ;
 	cmd->args[cmd->arg_count] = ft_strdup(arg);

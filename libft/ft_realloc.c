@@ -12,26 +12,37 @@
 
 #include "libft.h"
 
-void	*ft_realloc(void *ptr, size_t newsize)
+static void	*realloc_new_allocation(size_t newsize)
 {
 	void	*newptr;
-	size_t	oldsize;
 
-	if (ptr == NULL)
-	{
-		newptr = malloc(newsize);
-		if (newptr != NULL)
-			ft_memset(newptr, 0, newsize);
-		return (newptr);
-	}
-	oldsize = malloc_usable_size(ptr);
-	if (newsize < oldsize)
-		oldsize = newsize;
 	newptr = malloc(newsize);
-	if (newptr == NULL)
+	if (newptr)
+		ft_memset(newptr, 0, newsize);
+	return (newptr);
+}
+
+void	*ft_realloc(void *ptr, size_t oldsize, size_t newsize)
+{
+	void	*newptr;
+	size_t	copysize;
+
+	if (!ptr)
+		return (realloc_new_allocation(newsize));
+	if (newsize == 0)
+	{
+		free(ptr);
 		return (NULL);
-	ft_memset(newptr, 0, newsize);
-	ft_memcpy(newptr, ptr, oldsize);
+	}
+	newptr = malloc(newsize);
+	if (!newptr)
+		return (NULL);
+	copysize = oldsize;
+	if (newsize < oldsize)
+		copysize = newsize;
+	ft_memcpy(newptr, ptr, copysize);
+	if (newsize > oldsize)
+		ft_memset((char *)newptr + oldsize, 0, newsize - oldsize);
 	free(ptr);
 	return (newptr);
 }

@@ -1,4 +1,67 @@
 {
+	readline_leak_64
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:replace_history_entry
+	fun:readline_internal_teardown
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_63
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:replace_history_entry
+	fun:readline_internal_teardown
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_62
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:replace_history_entry
+	fun:readline_internal_teardown
+	fun:readline
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_61
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:alloc_history_entry
+	fun:add_history
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
+	readline_leak_60
+	Memcheck:Leak
+	match-leak-kinds: reachable
+	fun:malloc
+	fun:xmalloc
+	fun:alloc_history_entry
+	fun:add_history
+	fun:get_input
+	fun:main_loop
+	fun:main
+}
+{
 	readline_leak_59
 	Memcheck:Leak
 	match-leak-kinds: definite
